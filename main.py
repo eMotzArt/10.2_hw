@@ -50,16 +50,4 @@ def page_per_skills(skill: str):
 
 
 
-
-
-
-
-
-
-
-
-
-
-app.add_url_rule('/',view_func=page_index)
-
 app.run(host='127.0.0.2', port=80)
