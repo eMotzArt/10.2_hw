@@ -13,10 +13,9 @@ app = Flask(__name__)
 def page_index():
     to_return = []
     for candidate in candidates:
-        temp = f"{candidate['name']}\n" \
-               f"{candidate['id']}\n" \
-               f"{candidate['skills']}\n\n"
-        to_return.append(temp)
+        to_return.append(f"{candidate['name']}\n" \
+                         f"{candidate['id']}\n" \
+                         f"{candidate['skills']}\n\n")
     return f"<pre>{''.join(to_return)}</pre>"
 
 @app.route('/boss')
