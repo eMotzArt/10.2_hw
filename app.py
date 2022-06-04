@@ -1,7 +1,6 @@
 from flask import Flask
 from utils import load_candidates
 
-candidates = load_candidates()
 
 app = Flask(__name__)
 
@@ -43,5 +42,6 @@ def page_per_skills(skill: str):
     return "Not found"
 
 
-
-app.run(host='127.0.0.2', port=80)
+if __name__ == "__main__":
+    candidates = load_candidates()
+    app.run(host='127.0.0.2', port=80)
