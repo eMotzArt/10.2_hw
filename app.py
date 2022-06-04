@@ -1,11 +1,7 @@
-import json
 from flask import Flask
+from utils import load_candidates
 
-
-with open('candidates.json', encoding='utf-8') as file:
-    candidates = json.load(file)
-
-
+candidates = load_candidates()
 
 app = Flask(__name__)
 
