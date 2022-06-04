@@ -35,12 +35,15 @@ def page_per_num(cand_num):
 def page_per_skills(skill: str):
     to_return = []
     for candidate in candidates:
-        if skill.lower() in candidate['skills']:
-            to_return.append(f"{candidate['name']}\n" \
-                             f"{candidate['id']}\n" \
-                             f"{candidate['skills']}\n\n")
+        skill_list = candidate['skills'].split(', ')
+        for skill_ in skill_list:
+            if skill.lower() == skill_.lower():
+                to_return.append(f"{candidate['name']}\n" \
+                                 f"{candidate['id']}\n" \
+                                 f"{candidate['skills']}\n\n")
+    if to_return:
+        return f'<pre>{"".join(to_return)}</pre>'
 
-            return f'<pre>{"".join(to_return)}</pre>'
     return "Not found"
 
 
