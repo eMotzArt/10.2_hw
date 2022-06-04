@@ -18,10 +18,6 @@ def page_index():
                          f"{candidate['skills']}\n\n")
     return f"<pre>{''.join(to_return)}</pre>"
 
-@app.route('/boss')
-def page_boss():
-   return ""
-
 @app.route('/candidates/<int:cand_num>')
 def page_per_num(cand_num):
     to_return = []
