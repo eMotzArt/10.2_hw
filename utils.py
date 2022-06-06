@@ -20,7 +20,12 @@ def show_all():
 
 def show_by_id(id):
     candidates = load_candidates()
-    selected_candidate = candidates[id-1]
+
+    try:
+        selected_candidate = candidates[id-1]
+    except IndexError:
+        return "Not Found"
+
     to_return_list = []
     to_return_list.append(f'<img src={selected_candidate["picture"]}>\n\n')
 
