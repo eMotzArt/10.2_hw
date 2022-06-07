@@ -1,5 +1,4 @@
 from flask import Flask, abort
-from utils import show_all, show_by_id, show_by_skill
 from classes import Candidates, Preformater
 
 app = Flask(__name__)
