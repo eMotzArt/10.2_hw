@@ -29,5 +29,5 @@ def page_per_skills(skill: str):
         return Preformater.pre(result)
     else:
         abort(404)
-
-app.run(host='127.0.0.2', port=80)
+if __name__=='__name__':
+    app.run(host='127.0.0.2', port=80)
