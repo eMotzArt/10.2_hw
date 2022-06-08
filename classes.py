@@ -17,13 +17,9 @@ class RepositoryCandidates:
 
     def get_by_id(self, id: int) -> Optional[dict]:
         candidates = self.load_candidates()
-
-        try:
-            selected_candidate = candidates[id - 1]
-        except IndexError:
-            return None
-
-        return selected_candidate
+        for candidate in candidates:
+            if candidate['id'] == id:
+                return candidate
 
     def get_by_skill(self, skill) -> Optional[list[dict]]:
         candidates = self.load_candidates()
