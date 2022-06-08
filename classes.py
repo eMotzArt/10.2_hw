@@ -3,7 +3,8 @@ from typing import Optional
 
 
 class RepositoryCandidates:
-    '''Класс считывает и берет с базы данные (все, по id, по skill'у)'''
+    """Класс считывает и берет с базы данные (все, по id, по skill'у)"""
+
     def __init__(self, file_name: str):
         self.candidates_file = file_name
 
@@ -12,36 +13,17 @@ class RepositoryCandidates:
             return json.load(file)
 
     def get_all(self) -> list[dict]:
-        # candidates = self.load_candidates()
-        #
-        # to_return_list = []
-        # for candidate in candidates:
-        #     to_return_list.append(f"{candidate['name']}\n" \
-        #                           f"{candidate['id']}\n" \
-        #                           f"{candidate['skills']}\n\n")
-        # to_return_str = ''.join(to_return_list)
-        # return to_return_str
         return self.load_candidates()
 
     def get_by_id(self, id: int) -> Optional[dict]:
         candidates = self.load_candidates()
 
         try:
-            selected_candidate = candidates[id-1]
+            selected_candidate = candidates[id - 1]
         except IndexError:
             return None
 
         return selected_candidate
-        #
-        # to_return_list = []
-        # to_return_list.append(f'<img src={selected_candidate["picture"]}>\n\n')
-        #
-        # to_return_list.append(f"{selected_candidate['name']}\n" \
-        #                  f"{selected_candidate['id']}\n" \
-        #                  f"{selected_candidate['skills']}")
-        # to_return_str = ''.join(to_return_list)
-        #
-        # return to_return_str
 
     def get_by_skill(self, skill) -> Optional[list[dict]]:
         candidates = self.load_candidates()
@@ -53,6 +35,7 @@ class RepositoryCandidates:
         if skillful_candidates:
             return skillful_candidates
         return None
+
 
 class AppTemplateRenderer:
     def render_index(candidates_list: list[dict]) -> str:
@@ -66,11 +49,11 @@ class AppTemplateRenderer:
 
     def render_by_id(candidate: dict) -> str:
         to_return_list = []
-        to_return_list.append(f'<img src={candidate["picture"]}>\n\n')
 
+        to_return_list.append(f'<img src={candidate["picture"]}>\n\n')
         to_return_list.append(f"{candidate['name']}\n" \
-                         f"{candidate['id']}\n" \
-                         f"{candidate['skills']}")
+                              f"{candidate['id']}\n" \
+                              f"{candidate['skills']}")
         to_return_str = Preformater.pre(''.join(to_return_list))
 
         return to_return_str
@@ -83,6 +66,7 @@ class AppTemplateRenderer:
                                   f"{candidate['skills']}\n\n")
         to_return_str = Preformater.pre(''.join(to_return_list))
         return to_return_str
+
 
 class Preformater:
     @classmethod
