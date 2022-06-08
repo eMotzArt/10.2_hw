@@ -54,6 +54,36 @@ class RepositoryCandidates:
             return skillful_candidates
         return None
 
+class AppTemplateRenderer:
+    def render_index(candidates_list: list[dict]) -> str:
+        to_return_list = []
+        for candidate in candidates_list:
+            to_return_list.append(f"{candidate['name']}\n" \
+                                  f"{candidate['id']}\n" \
+                                  f"{candidate['skills']}\n\n")
+        to_return_str = Preformater.pre(''.join(to_return_list))
+        return to_return_str
+
+    def render_by_id(candidate: [dict]) -> str:
+        to_return_list = []
+        to_return_list.append(f'<img src={candidate["picture"]}>\n\n')
+
+        to_return_list.append(f"{candidate['name']}\n" \
+                         f"{candidate['id']}\n" \
+                         f"{candidate['skills']}")
+        to_return_str = Preformater.pre(''.join(to_return_list))
+
+        return to_return_str
+
+    def render_by_skill(candidates_list: list[dict]) -> str:
+        to_return_list = []
+        for candidate in candidates_list:
+            to_return_list.append(f"{candidate['name']}\n" \
+                                  f"{candidate['id']}\n" \
+                                  f"{candidate['skills']}\n\n")
+        to_return_str = Preformater.pre(''.join(to_return_list))
+        return to_return_str
+
 class Preformater:
     @classmethod
     def pre(cls, data: str) -> str:
