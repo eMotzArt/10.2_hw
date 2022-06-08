@@ -1,5 +1,5 @@
 from flask import Flask, abort
-from classes import Candidates, Preformater
+from classes import RepositoryCandidates, Preformater
 
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ CANDIDATES_FILE: str = 'candidates.json'
 
 @app.route('/')
 def page_index():
-    result = Candidates(CANDIDATES_FILE).show_all()
+    result = RepositoryCandidates(CANDIDATES_FILE).get_all()
     if result:
         return Preformater.pre(result)
     else:
@@ -16,7 +16,7 @@ def page_index():
 
 @app.route('/candidates/<int:cand_num>')
 def page_per_num(cand_num):
-    result = Candidates(CANDIDATES_FILE).show_by_id(cand_num)
+    result = RepositoryCandidates(CANDIDATES_FILE).get_by_id(cand_num)
     if result:
         return Preformater.pre(result)
     else:
@@ -24,7 +24,7 @@ def page_per_num(cand_num):
 
 @app.route('/skills/<skill>')
 def page_per_skills(skill: str):
-    result = Candidates(CANDIDATES_FILE).show_by_skill(skill)
+    result = RepositoryCandidates(CANDIDATES_FILE).get_by_skill(skill)
     if result:
         return Preformater.pre(result)
     else:
