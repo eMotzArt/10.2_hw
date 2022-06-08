@@ -64,7 +64,7 @@ class AppTemplateRenderer:
         to_return_str = Preformater.pre(''.join(to_return_list))
         return to_return_str
 
-    def render_by_id(candidate: [dict]) -> str:
+    def render_by_id(candidate: dict) -> str:
         to_return_list = []
         to_return_list.append(f'<img src={candidate["picture"]}>\n\n')
 
