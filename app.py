@@ -1,20 +1,33 @@
-from flask import Flask
-from utils import show_all, show_by_id, show_by_skill
+from flask import Flask, abort
+from classes import RepositoryCandidates, Preformater, AppTemplateRenderer as Renderer
 
 app = Flask(__name__)
 
+CANDIDATES_FILE: str = 'candidates.json'
+
 @app.route('/')
 def page_index():
-    return show_all()
+    if candidates := RepositoryCandidates(CANDIDATES_FILE).get_all():
+        return Renderer.render_index(candidates)
+    else:
+        abort(404)
 
-@app.route('/candidates/<int:cand_num>')
-def page_per_num(cand_num):
-   return show_by_id(cand_num)
+
+@app.route('/candidates/<int:candidate_number>')
+def page_per_num(candidate_number: int):
+
+    if candidate := RepositoryCandidates(CANDIDATES_FILE).get_by_id(candidate_number):
+        return Renderer.render_by_id(candidate)
+    else:
+        abort(404)
 
 @app.route('/skills/<skill>')
 def page_per_skills(skill: str):
-    return show_by_skill(skill)
+    if candidates := RepositoryCandidates(CANDIDATES_FILE).get_by_skill(skill):
+        return Renderer.render_by_skill(candidates)
+    else:
+        abort(404)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='127.0.0.2', port=80)
+
